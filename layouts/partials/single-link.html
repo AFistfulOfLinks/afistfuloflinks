@@ -1,0 +1,14 @@
+<div class="single-link">
+<h2>{{ .Title }}</h2>
+<p>By {{ .Params.author }}
+{{ with .Params.submitter }}
+- Submitted by <a href="{{ .url }}" class="submitter">{{ .name }}</a>
+{{ end }}
+</p>
+<blockquote>
+    {{ .Content |safeHTML }}
+    <cite>
+    (<a href="{{ .Params.source_url }}">source</a>)
+    </cite>
+</blockquote>
+</div>

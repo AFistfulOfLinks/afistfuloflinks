@@ -1,0 +1,7 @@
+[submodule "public"]
+	path = public
+	url = https://github.com/AFistfulOfLinks/afistfuloflinks.github.io.git
+	branch = master
+[submodule "themes/story"]
+	path = themes/story
+	url = https://github.com/xaprb/story.git

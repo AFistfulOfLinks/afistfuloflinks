@@ -1,0 +1,16 @@
+{{ define "main" }}
+<article class="center bg-white br-3 pv1 ph4 lh-copy f5 nested-links mw7">
+
+<p class="edition">
+Year {{ $.Page.Params.year }} - Edition {{ $.Page.Params.edition }}
+<p>
+
+{{ range $link := $.Page.Params.links }}
+    {{ $linkref := print "/links/" $link }}
+    {{ with $.Site.GetPage $linkref }}
+        {{ partial "single-link" . }}
+    {{ end }}
+{{ end }}
+
+</article>
+{{ end }}
