@@ -1,0 +1,35 @@
+name: Hugo website
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.74.3'
+
+      - name: Build
+        run: hugo
+
+      - name: Deploy to live website
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.REPO_TOKEN }}
+          publish_dir: ./public
+          external_repository: AFistfulOfLinks/afistfuloflinks.github.io
+          publish_branch: master
+          user_name: Github Actions deployment bot
+          user_email: githubactionsbot@users.noreply.github.com
