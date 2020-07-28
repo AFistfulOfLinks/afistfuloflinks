@@ -1,4 +1,4 @@
 baseURL = "https://afistfuloflinks.github.io/"
 languageCode = "en-us"
 title = "A Fistful of Links"
-theme = "story"
+theme = "hugo-vitae-afol"

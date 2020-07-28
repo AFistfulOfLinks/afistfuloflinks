@@ -2,6 +2,6 @@
 	path = public
 	url = https://github.com/AFistfulOfLinks/afistfuloflinks.github.io.git
 	branch = master
-[submodule "themes/story"]
-	path = themes/story
-	url = https://github.com/xaprb/story.git
+[submodule "themes/hugo-vitae-afol"]
+	path = themes/hugo-vitae-afol
+	url = https://github.com/AFistfulOfLinks/hugo-vitae-afol.git
