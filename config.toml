@@ -2,3 +2,34 @@ baseURL = "https://afistfuloflinks.github.io/"
 languageCode = "en-us"
 title = "A Fistful of Links"
 theme = "hugo-vitae-afol"
+
+[params]
+mainSections = ["posts"]
+nofeedSections = ["links"]
+subtitle = "Weekly newsletter about leadership, technology, books and anything else we felt compelled to share with others"
+avatar = "/img/afol-logo.png"
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 2
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 3
+
+[[params.social]]
+name = "Github"
+icon = "fab fa-github"
+url = "https://github.com/AFistfulOfLinks"
+
+[[params.social]]
+name = "RSS"
+icon = "fas fa-rss"
+url = "/index.xml"
