@@ -26,7 +26,8 @@ class LinksNumber(Rule):
     description = "Are there 5 links in edition?"
 
     def execute(self):
-        for path, metadata in self.context.posts_with_metadata.items():
+        for path in self.context.posts:
+            metadata = self.context.get_metadata(path)
             if 'links' not in metadata:
                 self.fail(f"{path.name} is missing links metadata")
             links_number = len(metadata['links'])
@@ -38,7 +39,8 @@ class LinksAreUnique(Rule):
     description = "Are all links in edition unique?"
 
     def execute(self):
-        for path, metadata in self.context.posts_with_metadata.items():
+        for path in self.context.posts:
+            metadata = self.context.get_metadata(path)
             if 'links' not in metadata:
                 self.fail(f"{path.name} is missing links metadata")
 
@@ -51,7 +53,8 @@ class LinksExist(Rule):
 
     def execute(self):
         links = [path.stem for path in self.context.links]
-        for path, metadata in self.context.posts_with_metadata.items():
+        for path in self.context.posts:
+            metadata = self.context.get_metadata(path)
             if 'links' not in metadata:
                 self.fail(f"{path.name} is missing links metadata")
 
@@ -68,7 +71,8 @@ class EditionIdSet(Rule):
     description = "Are 'year' and 'edition' metadata set?"
 
     def execute(self):
-        for path, metadata in self.context.posts_with_metadata.items():
+        for path in self.context.posts:
+            metadata = self.context.get_metadata(path)
             has_edition = metadata.get('edition')
             has_year = metadata.get('year')
             if not all([has_edition, has_year]):
@@ -80,15 +84,13 @@ class NoDuplicateEditions(Rule):
     description = "Are 'year'/'edition' metadata values unique in all posts?"
 
     def execute(self):
-        editions = []
-        for path in self.context.posts:
-            metadata = self.context.get_metadata(path)
+        editions = {}
+        for path, metadata in self.context.posts_with_metadata.items():
             this_edition = (metadata['year'], metadata['edition'])
             if this_edition in editions:
-                msg = (f"{path.name} contains duplicate edition id, "
-                       f"year: {this_edition[0]}, edition: {this_edition[1]}")
+                msg = f"{path.name} contains the same edition id as {editions[this_edition].name}"
                 self.fail(msg)
-            editions.append(this_edition)
+            editions[this_edition] = path
 
 
 @click.command()
