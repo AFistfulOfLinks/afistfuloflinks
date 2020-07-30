@@ -24,9 +24,9 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f tools/requirements.txt ]; then pip install -r tools/requirements.txt; fi
 
-      - name: Check if duplicate editions exist
+      - name: Run content linter
         run: |
-          ./tools/duplicate-editions-exist.py
+          ./tools/lint.py
 
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v2
