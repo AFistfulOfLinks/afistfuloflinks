@@ -2,7 +2,7 @@ name: Hugo website
 
 on:
   schedule:
-    - cron: '50 6 * * 1'
+    - cron: '50 0 * * 1'
   workflow_dispatch:
 
 jobs:
