@@ -1,0 +1,20 @@
+{{ define "main" -}}
+{{ if isset .Data "Term" }}
+<h2 class="page-title">Tag: {{ .Data.Term }}</h2>
+{{ else }}
+<h2 class="page-title">{{ .Title }}</h2>
+{{ end }}
+<ul class="posts flat">
+{{- range .Data.Pages -}}
+{{- if (in .Site.Params.excludedTypes .Type) -}}
+{{- else -}}
+<li class="post">
+<div class="post-header">
+<div class="matter">
+{{ partial "single-link" . }}
+</li>
+{{- end -}}
+{{- end -}}
+</ul>
+{{ end }}
+

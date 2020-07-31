@@ -1,6 +1,6 @@
-<div class="single-link">
+<article class="single-link">
 <h2>{{ .Title }}</h2>
-<p>By {{ .Params.author }}
+<p class="author">By {{ .Params.author }}
 {{ with .Params.submitter }}
 - Submitted by <a href="{{ .url }}" class="submitter">{{ .name }}</a>
 {{ end }}
@@ -8,7 +8,7 @@
 <blockquote>
     {{ .Content |safeHTML }}
     <cite>
-    (<a href="{{ .Params.source_url }}">source</a>)
+    <a href="{{ .Params.source_url }}">source</a>
     </cite>
 </blockquote>
-</div>
+</article>

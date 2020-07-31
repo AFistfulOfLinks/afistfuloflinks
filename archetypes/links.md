@@ -5,8 +5,7 @@ author: ""
 submitter:
     name: ""
     url: ""
-tag: ""
-skip: true
+tags: [""]
 ---
 
 Put excerpt here
