@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
+import io
 from pathlib import Path
+
 import yaml
 
 
@@ -19,9 +21,27 @@ class HugoContent():
         try:
             return self._content[key]
         except KeyError:
-            metadata = self._parse_file_metadata(path)
+            metadata, _ = self._parse_file(path)
             self._content[key] = metadata
             return metadata
+
+    def set_metadata(self, path: Path, new_metadata):
+        _, content = self._parse_file(path)
+
+        front_matter = io.StringIO()
+        yaml.safe_dump(
+            new_metadata, front_matter, indent=4, sort_keys=False,
+            allow_unicode=True
+        )
+        front_matter.seek(0)
+        front_matter = front_matter.read()
+
+        with open(path, 'w') as fh:
+            fh.write('---\n')
+            fh.write(front_matter)
+            fh.write('---\n')
+            if content:
+                fh.write(content)
 
     @property
     def links_with_metadata(self):
@@ -33,11 +53,19 @@ class HugoContent():
         return {path: self.get_metadata(path)
                 for path in self.posts}
 
-    def _parse_file_metadata(self, fileobj):
-        with open(fileobj) as fh:
-            front_matter = fh.read()
-        begin = 3
-        end = front_matter.index('---', begin)
-        front_matter = front_matter[begin:end]
+    def _parse_file(self, fileobj):
+        try:
+            with open(fileobj) as fh:
+                file_content = fh.read()
+                file_content.index('---')
+        except (FileNotFoundError, ValueError):
+            return {}, ''
+
+        front_matter_begin = 3
+        front_matter_end = file_content.index('---', front_matter_begin)
+
+        front_matter = file_content[front_matter_begin:front_matter_end]
         metadata = yaml.safe_load(front_matter)
-        return metadata
+
+        content = file_content[front_matter_end + front_matter_begin:]
+        return metadata, content.strip()
