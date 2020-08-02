@@ -1,7 +1,7 @@
 [submodule "public"]
 	path = public
-	url = https://github.com/AFistfulOfLinks/afistfuloflinks.github.io.git
+	url = ../afistfuloflinks.github.io.git
 	branch = master
 [submodule "themes/hugo-vitae-afol"]
 	path = themes/hugo-vitae-afol
-	url = https://github.com/AFistfulOfLinks/hugo-vitae-afol.git
+	url = ../hugo-vitae-afol.git
