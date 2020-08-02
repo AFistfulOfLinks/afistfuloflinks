@@ -16,14 +16,21 @@ class HugoContent():
         dir_path = Path(__file__).joinpath(f"../../content/{directory}/").resolve()
         return list(dir_path.glob("*.md"))
 
-    def get_metadata(self, path: Path):
+    def get_data(self, path: Path):
         key = path.as_posix()
         try:
             return self._content[key]
         except KeyError:
-            metadata, _ = self._parse_file(path)
-            self._content[key] = metadata
-            return metadata
+            metadata, content = self._parse_file(path)
+            data = {"metadata": metadata, "content": content}
+            self._content[key] = data
+            return data
+
+    def get_metadata(self, path: Path):
+        return self.get_data(path)['metadata']
+
+    def get_content(self, path: Path):
+        return self.get_data(path)['content']
 
     def set_metadata(self, path: Path, new_metadata):
         _, content = self._parse_file(path)

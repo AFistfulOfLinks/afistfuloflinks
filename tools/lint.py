@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import hashlib
+
 import click
 
 from helpers import HugoContent
@@ -91,6 +93,63 @@ class NoDuplicateEditions(Rule):
                 msg = f"{path.name} contains the same edition id as {editions[this_edition].name}"
                 self.fail(msg)
             editions[this_edition] = path
+
+
+class RequiredLinksMetadata(Rule):
+    description = "Do all links contain all required metadata?"
+
+    def execute(self):
+        for path in self.context.links:
+            fields = ['source_url', 'title', 'author']
+
+            link_metadata = self.context.get_metadata(path)
+
+            if 'submitter' in link_metadata:
+                for key in ['name', 'url']:
+                    master_key = f'submitter.{key}'
+                    link_metadata[master_key] = link_metadata['submitter'].get(key)
+                    fields.append(master_key)
+
+            for field in fields:
+                try:
+                    value = link_metadata.get(field).strip()
+                except AttributeError:
+                    value = ''
+                if not value:
+                    msg = f"{path.name} is missing '{field}'"
+                    self.fail(msg)
+
+            if 'tags' not in link_metadata:
+                msg = f"{path.name} is missing 'tags'"
+                self.fail(msg)
+
+            tags = [tag for tag in link_metadata['tags'] if tag.strip()]
+            if not tags:
+                msg = f"{path.name} doesn't have valid tags"
+                self.fail(msg)
+
+
+class LinksFilename(Rule):
+    description = "Are file names for link generated correctly?"
+
+    def execute(self):
+        for path in self.context.links:
+            link_metadata = self.context.get_metadata(path)
+            actual_hash = path.stem
+            expected_hash = hashlib.sha256(link_metadata['source_url'].encode('UTF-8')).hexdigest()
+            if expected_hash != actual_hash:
+                msg = f"{path.name} should be named {expected_hash}.md"
+                self.fail(msg)
+
+
+class LinksHaveExcerpt(Rule):
+    description = "Do all links contain excerpt?"
+
+    def execute(self):
+        for path in self.context.links:
+            if not self.context.get_content(path):
+                msg = f"{path.name} is missing excerpt"
+                self.fail(msg)
 
 
 @click.command()
