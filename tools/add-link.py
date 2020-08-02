@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 
 import hashlib
-import io
 from pathlib import Path
 from tempfile import mkstemp
 
 import click
-import yaml
 
 from helpers import HugoContent
 
