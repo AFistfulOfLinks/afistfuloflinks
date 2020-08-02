@@ -4,6 +4,8 @@
 Year {{ $.Page.Params.year }} - Edition {{ $.Page.Params.edition }}
 <p>
 
+<p><strong>A Fistful of Links</strong> is a weekly newsletter about leadership, technology, books, and anything else we felt compelled to share with others, brought to you by <a href="https://twitter.com/OgMaciel">Og Maciel</a> and <a href="https://mirekdlugosz.com/">Mirek Długosz</a>.</p>
+
 {{ range $link := $.Page.Params.links }}
     {{ $linkref := print "/links/" $link }}
     {{ with $.Site.GetPage $linkref }}
@@ -17,6 +19,9 @@ Year {{ $.Page.Params.year }} - Edition {{ $.Page.Params.edition }}
         {{ end }}
     {{ end }}
 {{ end }}
+
+<p>Happy reading!</p>
+<p><strong>The Editors at A Fistful of Links</strong></p>
 
 <div class="tags">
     <div class="taxosfloating_left">
