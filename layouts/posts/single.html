@@ -31,7 +31,7 @@ Year {{ $.Page.Params.year }} - Edition {{ $.Page.Params.edition }}
         <p>
         {{ range $tag := sort ($tagsScratch.Get "tags") }}
             {{ with $.Site.GetPage (printf "/tags/%s" (urlize $tag)) }}
-            <a href="{{ .Permalink }}">{{ $tag }}</a>
+            <a href="{{ .Permalink }}">{{ $tag | urlize }}</a>
             {{ end }}
         {{ end }}
         </p>
