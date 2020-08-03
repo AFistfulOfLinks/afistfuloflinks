@@ -68,6 +68,14 @@ All links must have `source_url`, `title`, `author` and `tags` variables set. `t
 
 All links must contain excerpt (lead, sneak peek) from linked article below Hugo's front matter. You can use markdown formatting.
 
+### Building website for testing
+
+When building website, you probably want to pass `-F`, `--buildFuture` flag to `hugo` - otherwise, new edition will not be displayed.
+
+```
+hugo serve -F
+```
+
 ## Tools
 
 ### lint
