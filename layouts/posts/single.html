@@ -38,4 +38,7 @@ Year {{ $.Page.Params.year }} - Edition {{ $.Page.Params.edition }}
     </div>
 </div>
 <div class="clearit"></div>
+
+{{ template "_internal/disqus.html" . }}
+
 {{ end }}

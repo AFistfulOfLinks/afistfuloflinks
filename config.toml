@@ -2,6 +2,7 @@ baseURL = "https://afistfuloflinks.github.io/"
 languageCode = "en-us"
 title = "A Fistful of Links"
 theme = "hugo-vitae-afol"
+disqusShortname = "afol"
 
 [params]
 mainSections = ["posts"]
