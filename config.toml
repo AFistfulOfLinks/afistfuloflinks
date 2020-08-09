@@ -3,6 +3,7 @@ languageCode = "en-us"
 title = "A Fistful of Links"
 theme = "hugo-vitae-afol"
 disqusShortname = "afol"
+googleAnalytics = "UA-2205779-8"
 
 [params]
 mainSections = ["posts"]
