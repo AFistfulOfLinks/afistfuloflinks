@@ -7,14 +7,15 @@ assignees: ''
 
 ---
 
----
-source_url: ""
-title: ""
-author: ""
-submitter:
-    name: ""
-    url: ""
-tags: [""]
----
+* URL: 
+* Title: 
+* Author: 
+* Submitter:
+  * Name: 
+  * Profile URL: 
+* Tags:
+  * Tag1
+  * Tag2
 
-Put excerpt here
+**Put excerpt here**
+Consider writing a short paragraph summarizing the article.
