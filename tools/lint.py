@@ -105,10 +105,9 @@ class RequiredLinksMetadata(Rule):
             link_metadata = self.context.get_metadata(path)
 
             if 'submitter' in link_metadata:
-                for key in ['name', 'url']:
-                    master_key = f'submitter.{key}'
-                    link_metadata[master_key] = link_metadata['submitter'].get(key)
-                    fields.append(master_key)
+                master_key = 'submitter.name'
+                link_metadata[master_key] = link_metadata['submitter'].get('name')
+                fields.append(master_key)
 
             for field in fields:
                 try:

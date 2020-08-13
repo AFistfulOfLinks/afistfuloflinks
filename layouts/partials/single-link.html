@@ -2,7 +2,7 @@
 <h2>{{ .Title }}</h2>
 <p class="author">By {{ .Params.author }}
 {{ with .Params.submitter }}
-- Submitted by <a href="{{ .url }}" class="submitter">{{ .name }}</a>
+- Submitted by {{ if isset . "url" }}<a href="{{ .url }}" class="submitter">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}
 {{ end }}
 </p>
 <blockquote>

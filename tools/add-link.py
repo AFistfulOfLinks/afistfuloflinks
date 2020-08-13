@@ -57,11 +57,12 @@ def main(post, title, author, submitter_name, submitter_url, tags, url):
             print()
             break
 
-    if new_metadata['submitter.name'] and new_metadata['submitter.url']:
+    if new_metadata['submitter.name']:
         new_metadata['submitter'] = {
             'name': new_metadata['submitter.name'],
-            'url': new_metadata['submitter.url'],
         }
+        if new_metadata['submitter.url']:
+            new_metadata['submitter']['url'] = new_metadata['submitter.url']
     new_metadata.pop('submitter.name')
     new_metadata.pop('submitter.url')
 
