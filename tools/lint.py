@@ -28,7 +28,13 @@ class LinksNumber(Rule):
     description = "Are there 5 links in edition?"
 
     def execute(self):
+        known_exceptions = [
+            '2018-05-18', '2018-05-25', '2018-06-01', '2018-06-15', '2018-06-22'
+        ]
         for path in self.context.posts:
+            if path.stem in known_exceptions:
+                continue
+
             metadata = self.context.get_metadata(path)
             if 'links' not in metadata:
                 self.fail(f"{path.name} is missing links metadata")
