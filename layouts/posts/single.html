@@ -1,8 +1,6 @@
 {{ define "main" }}
 {{ $tagsScratch := newScratch }}
-<p class="edition">
-Year {{ $.Page.Params.year }} - Edition {{ $.Page.Params.edition }}
-<p>
+{{ partial "edition.html" . }}
 
 <p><strong>A Fistful of Links</strong> is a weekly newsletter about leadership, technology, books, and anything else we felt compelled to share with others, brought to you by <a href="https://twitter.com/OgMaciel">Og Maciel</a> and <a href="https://mirekdlugosz.com/">Mirek Długosz</a>.</p>
 
