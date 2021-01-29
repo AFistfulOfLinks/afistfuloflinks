@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
+import datetime
 import io
+import locale
 from pathlib import Path
 
 import yaml
@@ -76,3 +78,55 @@ class HugoContent():
 
         content = file_content[front_matter_end + front_matter_begin:]
         return metadata, content.strip()
+
+
+class EditionNumber():
+    _locale_strptime_format = None
+
+    @classmethod
+    def _get_locale_strptime_format(cls):
+        if cls._locale_strptime_format is not None:
+            return cls._locale_strptime_format
+
+        locales = locale.getlocale(locale.LC_TIME)
+        if locales[0] is None:
+            locales = locale.getdefaultlocale()
+
+        locale_strptime_format = '%d-%m-%Y'
+        try:
+            if locales[0].endswith('_US'):
+                locale_strptime_format = '%m-%d-%Y'
+        except AttributeError:
+            pass
+
+        cls._locale_strptime_format = locale_strptime_format
+        return locale_strptime_format
+
+    @classmethod
+    def _parse_date_string(cls, date_string):
+        delimiters = ['-', '.', '/', '']
+        locale_strptime_format = cls._get_locale_strptime_format()
+        for date_format in ("%Y-%m-%d", locale_strptime_format):
+            for delimiter in delimiters:
+                strptime_format = date_format.replace('-', delimiter)
+                try:
+                    date_obj = datetime.datetime.strptime(date_string, strptime_format)
+                    return date_obj
+                except ValueError:
+                    pass
+
+        raise ValueError(f"Could not figure out format of {date_string}")
+
+    @classmethod
+    def from_date(cls, date_string):
+        date_obj = cls._parse_date_string(date_string)
+        edition_number = int(date_obj.strftime("%W"))
+        if edition_number == 0:
+            previous_year = datetime.datetime(date_obj.year - 1, 12, 31)
+            edition_number = int(previous_year.strftime("%W"))
+        return edition_number
+
+    @classmethod
+    def from_path(cls, path):
+        date_string = path.stem
+        return cls.from_date(date_string)
