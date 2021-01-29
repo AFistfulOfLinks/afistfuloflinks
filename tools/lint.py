@@ -5,6 +5,7 @@ import hashlib
 import click
 
 from helpers import HugoContent
+from helpers import EditionNumber
 
 
 class RuleCheckFailedError(Exception):
@@ -99,6 +100,24 @@ class NoDuplicateEditions(Rule):
                 msg = f"{path.name} contains the same edition id as {editions[this_edition].name}"
                 self.fail(msg)
             editions[this_edition] = path
+
+
+class EditionNumberIsCorrect(Rule):
+    description = "Is 'edition' metadata correct for post on this date?"
+
+    def execute(self):
+        for path in self.context.posts:
+            # we started counting in May in 2018, so skip that year
+            year, _ = path.stem.split('-', 1)
+            if year == '2018':
+                continue
+
+            metadata = self.context.get_metadata(path)
+            edition_in_metadata = metadata.get('edition')
+            calculated_edition = EditionNumber.from_path(path)
+            if edition_in_metadata != calculated_edition:
+                msg = f"{path.name} edition should be {calculated_edition}, is {edition_in_metadata}"
+                self.fail(msg)
 
 
 class RequiredLinksMetadata(Rule):

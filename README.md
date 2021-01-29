@@ -105,6 +105,23 @@ Field values can be passed in during command invocation. When not set, tool will
 
 This tool manages only metadata (front matter). You still need to add link excerpt by editing the file.
 
+### edition-num-for-date
+
+Tells edition number for specified date. Support unlimited number of arguments.
+
+```
+./tools/edition-num-for-date.py 2020-01-06 2020-01-13
+./tools/edition-num-for-date.py 01/06/2020 01.06.2020 01062020
+./tools/edition-num-for-date.py content/posts/2020-01-06.md
+./tools/edition-num-for-date.py -w content/posts/2020-01-06.md
+```
+
+Date segments can be delimited using `-`, `.`, `/` or nothing at all. When year is the last component, order of day and month is determined using system locale - if locale contains `_US`, it is assumed that month is specified first, and day second (`%m-%d-%Y`). Otherwise, day is assumed to be first (`%d-%m-%Y`).
+
+Argument can be path to file, but that file must exist. Date will be read from file name.
+
+Optional `-w`/`--write` flag can be used to automatically set post metadata to value calculated by tool. Obviously that applies only to arguments that are paths to files.
+
 ### unclaimed-links
 
 Lists links that exist in source, but are not part of any post (edition).
