@@ -29,7 +29,7 @@ Og Maciel is a Director of Quality Engineering for Red Hat Management QE and has
 * [Twitter](https://twitter.com/MirekDlugosz)
 * [Blog](https://mirekdlugosz.com/)
 
-Software tester and open source enthusiast with social science background. Senior Quality Engineer in Red Hat Satellite QE.
+Software tester and open source enthusiast with social science background. Senior Quality Engineer in Red Hat Subscription Management QE.
 
 {{< rawhtml >}}
 </div>
