@@ -35,3 +35,16 @@ url = "https://github.com/AFistfulOfLinks"
 name = "RSS"
 icon = "fas fa-rss"
 url = "/index.xml"
+
+[mediaTypes]
+[mediaTypes."text/email-html"]
+suffixes = ["html"]
+
+[outputFormats]
+[outputFormats.WeeklyEmail]
+name = "WeeklyEmail"
+mediaType = "text/email-html"
+path = "email"
+
+[outputs]
+page = ["HTML", "WeeklyEmail"]
