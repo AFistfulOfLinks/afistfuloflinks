@@ -17,7 +17,7 @@ title: "About"
 * [Twitter](https://www.twitter.com/OgMaciel)
 * [Amazon](https://www.amazon.com/author/ogmaciel)
 
-Og Maciel is a Director of Quality Engineering for Red Hat Management QE and has spent the last 8+ years building a team of Black Belt Quality Engineers responsible for the automation of complex systems and delivering quality products through the use of continuous delivery processes. He is also a [Published Writer](https://www.amazon.com/author/ogmaciel), an ex-Podcaster, a Dad, and an Avid Reader.
+Og Maciel leads a diverse team of Software Engineers, solving problems that people haven’t predicted, seeing things people haven’t seen, and connecting people who need to be connected. He's also a [Published Writer](https://www.amazon.com/author/ogmaciel), Continuous Integration enthusiast with a strong background in Python and Software Automation. Avid reader! Knowledge Seeker and Sharer!
 {{< rawhtml >}}
 </div>
 
